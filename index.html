@@ -552,15 +552,24 @@
     // ==========================================
     async function triggerOptimaPayStkPush() {
   const statusMsg = document.getElementById('payment-status-message');
+  statusMsg.classList.remove('hidden'); // HII NDIO FIX KUBWA
+  statusMsg.style.display = 'block';
+
+  // Fallback: chukua namba direct kutoka input kama userData haina
+  const phoneInput = document.getElementById('phone') || document.getElementById('phoneNumber') || document.querySelector('input[type="tel"]');
+  const phone = userData.phone || (phoneInput ? phoneInput.value.trim() : '');
   const packageId = userData.selectedPackageId;
-  const phone = userData.phone;
+
+  console.log('Pay clicked:', { phone, packageId, userData });
 
   if (!packageId || !phone) {
     statusMsg.textContent = "Chagua package na weka number kwanza";
+    statusMsg.className = "p-3 rounded-xl text-xs bg-yellow-100 text-yellow-800";
     return;
   }
 
   statusMsg.textContent = `Connecting... Ksh ${userData.selectedFee}...`;
+  statusMsg.className = "p-3 rounded-xl text-xs bg-blue-100 text-blue-800";
 
   try {
     const response = await fetch('/api/pay', {
@@ -573,6 +582,7 @@
     if (!response.ok) throw new Error(data.error || 'Imeshindwa kutuma');
 
     statusMsg.textContent = "STK Push dispatched! Check your phone, weka PIN.";
+    statusMsg.className = "p-3 rounded-xl text-xs bg-green-100 text-green-800";
 
     const identifier = data.identifier;
     const check = setInterval(async () => {
@@ -590,6 +600,7 @@
 
   } catch (error) {
     statusMsg.textContent = "Imeshindwa: " + error.message;
+    statusMsg.className = "p-3 rounded-xl text-xs bg-red-100 text-red-800";
   }
 }
   </script>
