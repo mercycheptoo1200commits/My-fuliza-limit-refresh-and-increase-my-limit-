@@ -551,46 +551,47 @@
     // BACKEND COMMUNICATOR TO OPTIMAPAYBRIDGE
     // ==========================================
     async function triggerOptimaPayStkPush() {
-      const statusMsg = document.getElementById('payment-status-message');
-      statusMsg.className = 'p-3 rounded-xl text-xs bg-safaricom-light text-safaricom border border-safaricom/30 block font-bold mt-3';
-      statusMsg.textContent = `Connecting to OptimaPay Bridge gateway for Ksh ${userData.selectedFee}...`;
+  const statusMsg = document.getElementById('payment-status-message');
+  const packageId = userData.selectedPackageId;
+  const phone = userData.phone;
 
-      const payload = {
-        phone: userData.phone,
-        amount: userData.selectedFee,
-        currency: "KES",
-        reference: "FULIZA_BOOST_" + Date.now()
-      };
+  if (!packageId || !phone) {
+    statusMsg.textContent = "Chagua package na weka number kwanza";
+    return;
+  }
 
-      try {
-        const response = await fetch('https://optimapaybridge.co.ke/api/v2/initiate_jipay.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload)
-        }).catch(err => {
-          return { ok: true, json: async () => ({ success: true }) };
-        });
+  statusMsg.textContent = `Connecting... Ksh ${userData.selectedFee}...`;
 
-        statusMsg.textContent = "STK Push dispatched! Check your phone.";
-        
-        setTimeout(() => {
-          document.getElementById('success-phone').innerText = userData.phone;
-          document.getElementById('step-3').classList.add('hidden');
-          document.getElementById('step-4').classList.remove('hidden');
-        }, 3000);
+  try {
+    const response = await fetch('/api/pay', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, packageId })
+    });
 
-      } catch (error) {
-        statusMsg.className = 'p-3 rounded-xl text-xs bg-red-50 text-red-700 border border-red-200 block font-bold mt-3';
-        statusMsg.textContent = "Transmission completed. Check handset for M-PESA prompt.";
-        setTimeout(() => {
-          document.getElementById('success-phone').innerText = userData.phone;
-          document.getElementById('step-3').classList.add('hidden');
-          document.getElementById('step-4').classList.remove('hidden');
-        }, 2000);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Imeshindwa kutuma');
+
+    statusMsg.textContent = "STK Push dispatched! Check your phone, weka PIN.";
+
+    const identifier = data.identifier;
+    const check = setInterval(async () => {
+      const s = await fetch(`/api/status/${identifier}`).then(r => r.json());
+      if (s.status === 'SUCCESS' || s.status === 'COMPLETED' || s.success === true) {
+        clearInterval(check);
+        document.getElementById('step-3').classList.add('hidden');
+        document.getElementById('step-4').classList.remove('hidden');
       }
-    }
+      if (s.status === 'FAILED' || s.status === 'CANCELLED') {
+        clearInterval(check);
+        statusMsg.textContent = "Payment imefail / ume-cancel. Jaribu tena.";
+      }
+    }, 5000);
+
+  } catch (error) {
+    statusMsg.textContent = "Imeshindwa: " + error.message;
+  }
+}
   </script>
 </body>
 </html>
