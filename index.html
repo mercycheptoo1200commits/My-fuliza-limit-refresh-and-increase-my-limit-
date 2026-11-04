@@ -202,7 +202,32 @@
     </style>        
 </head>        
 <body>  
-
+<script>
+(function(){
+  document.addEventListener('click', function(e){
+    var card = e.target.closest('[data-package-id], [data-id], .package, .package-card, .plan, .bundle');
+    if(!card) return;
+    var pid = card.getAttribute('data-package-id') || card.getAttribute('data-id') || card.id || '1';
+    if(window.userData){ window.userData.selectedPackageId = pid; window.userData.packageId = pid; }
+    document.querySelectorAll('.selected').forEach(function(el){ el.classList.remove('selected'); });
+    card.classList.add('selected');
+    console.log('Package imechaguliwa:', pid);
+  });
+  var oldPay = window.triggerOptimaPayStkPush;
+  window.triggerOptimaPayStkPush = function(){
+    if(window.userData && !window.userData.selectedPackageId){
+      var first = document.querySelector('[data-package-id], [data-id], .package, .package-card, .plan, .bundle');
+      if(first){
+        var pid2 = first.getAttribute('data-package-id') || first.getAttribute('data-id') || first.id || '1';
+        window.userData.selectedPackageId = pid2;
+        window.userData.packageId = pid2;
+        console.log('Auto-selected package:', pid2);
+      }
+    }
+    if(oldPay) return oldPay.apply(this, arguments);
+  };
+})();
+</script>
 <!-- Live Notification Pop-up Container -->
 <div id="liveNotif" class="live-notification">
     <div class="notif-icon-box">✓</div>
